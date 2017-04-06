@@ -32,7 +32,7 @@ CV_IMPL void cvNeumannBoundCond(const CvArr * srcarr,
 {
   CV_FUNCNAME("cvNeumannBoundCond");
     
-  __BEGIN__;
+  __CV_BEGIN__;
   CvMat sstub, *src;
   CvMat dstub, *dst;
   CvSize size;
@@ -50,7 +50,7 @@ CV_IMPL void cvNeumannBoundCond(const CvArr * srcarr,
   if( !CV_ARE_SIZES_EQ(src, dst))
     CV_ERROR( CV_StsUnmatchedSizes, "The input images must have the same size" );
     
-  size = cvGetMatSize( src );
+  size = cvGetSize( src );
   cvCopy(src, dst);
     
   ptr_src = src->data.fl;
@@ -77,5 +77,5 @@ CV_IMPL void cvNeumannBoundCond(const CvArr * srcarr,
     ptr_dst[size.width-1+iStep_dst*j]=ptr_src[size.width-3+iStep_src*j];
   }
     
-  __END__;
+  __CV_END__;
 }

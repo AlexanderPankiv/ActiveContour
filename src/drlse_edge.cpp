@@ -20,7 +20,7 @@ CV_IMPL void cvDirac(const CvArr* srcarr,
 {
     CV_FUNCNAME("cvDirac");
     
-    __BEGIN__;
+    __CV_BEGIN__;
     CvMat sstub, *src;
     CvMat dstub, *dst;
     CvSize size;
@@ -38,7 +38,7 @@ CV_IMPL void cvDirac(const CvArr* srcarr,
         CV_ERROR( CV_StsUnsupportedFormat, "Only-32bit, 1-channel output images are supported" );
     if( !CV_ARE_SIZES_EQ( src, dst ))
         CV_ERROR( CV_StsUnmatchedSizes, "The input images must have the same size" );
-    size = cvGetMatSize( src );
+    size = cvGetSize( src );
     
     iStep_src = src->step / sizeof(fPtr_src[0]);
     fPtr_src = src->data.fl;
@@ -58,7 +58,7 @@ CV_IMPL void cvDirac(const CvArr* srcarr,
         }
     }
     
-    __END__;
+    __CV_END__;
 }
 
 CV_IMPL void cvCalS(const CvArr* srcarr,
@@ -66,7 +66,7 @@ CV_IMPL void cvCalS(const CvArr* srcarr,
 {
     CV_FUNCNAME("cvCalS");
     
-    __BEGIN__;
+    __CV_BEGIN__;
     CvMat sstub, *src;
     CvMat dstub, *dst;
     CvMat* src_dx=0, *src_dy=0;
@@ -87,7 +87,7 @@ CV_IMPL void cvCalS(const CvArr* srcarr,
     if( !CV_ARE_SIZES_EQ( src, dst ))
         CV_ERROR( CV_StsUnmatchedSizes, "The input images must have the same size" );
     
-    size = cvGetMatSize( src );
+    size = cvGetSize( src );
     
     src_dx  = cvCreateMat(size.height, size.width, CV_32FC1 );
     src_dy  = cvCreateMat(size.height, size.width, CV_32FC1 );
@@ -110,7 +110,7 @@ CV_IMPL void cvCalS(const CvArr* srcarr,
     cvReleaseMat(&src_dx);
     cvReleaseMat(&src_dy);
     
-    __END__;
+    __CV_END__;
 }
 
 CV_IMPL void cvCurvature(const CvArr* srcarr_x, 
@@ -119,7 +119,7 @@ CV_IMPL void cvCurvature(const CvArr* srcarr_x,
 {
     CV_FUNCNAME("cvCurvature");
     
-    __BEGIN__;
+    __CV_BEGIN__;
     
     CvMat sstub_x, sstub_y, *src_x, *src_y;
     CvMat dstub, *dst;
@@ -142,7 +142,7 @@ CV_IMPL void cvCurvature(const CvArr* srcarr_x,
     if( !CV_ARE_SIZES_EQ( src_x, src_y ))
         CV_ERROR( CV_StsUnmatchedSizes, "The input images must have the same size" );
     
-    size = cvGetMatSize( src_x );
+    size = cvGetSize( src_x );
     Nxx = cvCreateMat(size.height, size.width, CV_32FC1 );
     Nyy = cvCreateMat(size.height, size.width, CV_32FC1 );
     ones= cvCreateMat(size.height, size.width, CV_32FC1 );
@@ -159,7 +159,7 @@ CV_IMPL void cvCurvature(const CvArr* srcarr_x,
     cvReleaseMat(&Nyy);
     cvReleaseMat(&ones);
     
-    __END__;
+    __CV_END__;
     
 }
 
@@ -168,7 +168,7 @@ CV_IMPL void cvDistReg(const CvArr* srcarr,
 {
     CV_FUNCNAME("cvDistReg");
     
-    __BEGIN__;
+    __CV_BEGIN__;
     CvMat sstub, *src;
     CvMat dstub, *dst;
     CvMat* src_dx=0, *src_dy=0, *s=0, *ps=0;
@@ -190,7 +190,7 @@ CV_IMPL void cvDistReg(const CvArr* srcarr,
     
     if( !CV_ARE_SIZES_EQ( src, dst ))
         CV_ERROR( CV_StsUnmatchedSizes, "The input images must have the same size" );
-    size = cvGetMatSize( src );
+    size = cvGetSize( src );
     
     src_dx  = cvCreateMat(size.height, size.width, CV_32FC1 );
     src_dy  = cvCreateMat(size.height, size.width, CV_32FC1 );
@@ -269,7 +269,7 @@ CV_IMPL void cvDistReg(const CvArr* srcarr,
     cvReleaseMat(&del);
     cvReleaseMat(&ones);
     
-    __END__;
+    __CV_END__;
 }
 
 CV_IMPL void cvDrlse_edge(CvArr * srcphi, 
@@ -284,7 +284,7 @@ CV_IMPL void cvDrlse_edge(CvArr * srcphi,
 {   
     CV_FUNCNAME( "cvDrlse_edge" );
     
-    __BEGIN__;
+    __CV_BEGIN__;
     
     CvMat sstub1, sstub2, *phi, *grad;
     CvMat dstub, *dst;
@@ -307,7 +307,7 @@ CV_IMPL void cvDrlse_edge(CvArr * srcphi,
     
     if( !CV_ARE_SIZES_EQ( phi, grad ))
         CV_ERROR( CV_StsUnmatchedSizes, "The input images must have the same size" );
-    size = cvGetMatSize( phi );
+    size = cvGetSize( phi );
     
     //Initialization 
     gradx = cvCreateMat(size.height, size.width, CV_32FC1 );
@@ -399,7 +399,7 @@ CV_IMPL void cvDrlse_edge(CvArr * srcphi,
     cvReleaseMat(&temp2);
     cvReleaseMat(&temp3);
     
-    __END__;
+    __CV_END__;
     
 }
 
@@ -428,7 +428,7 @@ cvDRLSE(const CvArr * image,
 
     CV_FUNCNAME( "cvDRLSE" );
     
-    __BEGIN__;
+    __CV_BEGIN__;
     
     CV_CALL( msk = cvGetImage(mask,    &sstub1 ));
     CV_CALL( img = cvGetImage(image,   &sstub2 ));    
@@ -513,5 +513,5 @@ cvDRLSE(const CvArr * image,
     cvReleaseMat(&ones);
     
     return point;
-    __END__;
+    __CV_END__;
 }

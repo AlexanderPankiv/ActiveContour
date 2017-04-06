@@ -100,7 +100,7 @@ cvSnakeInterp(CvPoint* points,
 {
     CV_FUNCNAME("cvSnakeInterp");
     
-    __BEGIN__;
+    __CV_BEGIN__;
     int distance=0, cont=0, i;
     int length = * _length;
     int length_out = * _length;
@@ -146,7 +146,7 @@ cvSnakeInterp(CvPoint* points,
     
     return points;
     
-    __END__;
+    __CV_END__;
 }
 
 CV_IMPL float cvFindOpElem(const CvArr* srcarr,
@@ -154,14 +154,14 @@ CV_IMPL float cvFindOpElem(const CvArr* srcarr,
 {
     CV_FUNCNAME("cvFindOpElem");
     
-    __BEGIN__;
+    __CV_BEGIN__;
     CvMat sstub, *src;
     CvSize size;
     float dstElem, *ptr_src;
     int iStep_src;
     
     CV_CALL( src = cvGetMat(srcarr, &sstub ));
-    size = cvGetMatSize( src );
+    size = cvGetSize( src );
     if( CV_MAT_TYPE(src->type) != CV_32FC1)
         CV_ERROR( CV_StsUnsupportedFormat, "Only-32bit, 1-channel input images are supported" );
     ptr_src = src->data.fl;
@@ -180,7 +180,7 @@ CV_IMPL float cvFindOpElem(const CvArr* srcarr,
             }
         }
     return dstElem;
-    __END__;
+    __CV_END__;
     
 }
 
@@ -193,7 +193,7 @@ CV_IMPL void cvGVF(const CvArr* srcarr,
 {
     CV_FUNCNAME("cvGVF");
     
-    __BEGIN__;
+    __CV_BEGIN__;
     CvMat sstub, *src;
     CvMat dstubu, *dst_u;
     CvMat dstubv, *dst_v;
@@ -239,7 +239,7 @@ CV_IMPL void cvGVF(const CvArr* srcarr,
     iStep_fy = fy->step / sizeof(fPtr_fy[0]);
     iStep_src = src->step / sizeof(fPtr_src[0]);
     
-    size = cvGetMatSize( src );
+    size = cvGetSize( src );
     cvNeumannBoundCond(src, src);
     
     if (flag == 1){
@@ -312,10 +312,10 @@ CV_IMPL void cvGVF(const CvArr* srcarr,
     cvReleaseMat(&del_v);
     cvReleaseMat(&SqrMagf);
     
-    __END__;
+    __CV_END__;
 }
 
-static CvStatus
+static CVStatus
 icvSnake32FC1_GVF( const CvArr *src_u,
                   const CvArr *src_v,
                   CvPoint * pt,
@@ -337,7 +337,7 @@ icvSnake32FC1_GVF( const CvArr *src_u,
     CvSize roi;
     
     CV_FUNCNAME("icvSnake32FC1_GVF");
-    __BEGIN__;
+    __CV_BEGIN__;
     
     CV_CALL( u = cvGetMat(src_u, &sstub_u ));
     CV_CALL( v = cvGetMat(src_v, &sstub_v ));
@@ -437,9 +437,10 @@ icvSnake32FC1_GVF( const CvArr *src_u,
     cvReleaseMat(&A);
     cvReleaseMat(&VX);
     cvReleaseMat(&VY);
-    return CV_OK;
-    
-    __END__;
+
+    return CV_StsOk;
+
+    __CV_END__;
 }
 
 CvPoint*
@@ -461,7 +462,7 @@ cvSnakeImageGVF(const CvArr* srcarr,
     int flag = calcInitial ? CV_REINITIAL : CV_NREINITIAL;
     CV_FUNCNAME("cvSnakeImageGVF");    
     
-    __BEGIN__;
+    __CV_BEGIN__;
     
     CV_CALL( src = cvGetMat(srcarr, &sstub ));
     size = cvGetSize( src );
@@ -501,7 +502,7 @@ cvSnakeImageGVF(const CvArr* srcarr,
         }
     }
     return points;
-    __END__;
+    __CV_END__;
 }
 
 /* end of file */
